@@ -2,7 +2,7 @@
 
 ### First: Review Existing Unstructured Data and Diagram a New Structured Relational Data Model
 
-For the three json files, I explode them using Python and export them to csv files (ipython). For rewardsReceiptItemList column in receipts table, there are more than one elements in this column so I extract those elements from the original column into new colimns. After exploding them, I find that the rewardsReceiptItemList_brandCode column can merge with the brandCode column in Brand table to have more unformation about the relationship for receipts and brand. Therefore, I connect these two column with the key brandCode and rewardsReceiptItemList_brandCode. For Users table, I connect Users table with Receipts table on Users._id and Receipts.userId. 
+For the three json files, I explode them using Python and export them to csv files (Fetch_Rewards.ipynb). For rewardsReceiptItemList column in receipts table, there are more than one elements in this column so I extract those elements from the original column into new colimns. After exploding them, I find that the rewardsReceiptItemList_brandCode column can merge with the brandCode column in Brand table to have more unformation about the relationship for receipts and brand. Therefore, I connect these two column with the key brandCode and rewardsReceiptItemList_brandCode. For Users table, I connect Users table with Receipts table on Users._id and Receipts.userId. 
 
 ![ER_diagram](https://user-images.githubusercontent.com/62042891/172951436-b06f0444-b6c5-4fa2-8e79-47a2aa19accc.png)
 
