@@ -2,13 +2,13 @@
 
 ### First: Review Existing Unstructured Data and Diagram a New Structured Relational Data Model
 
-For the three json files, I explode them using Python and export them to csv files (Fetch_Rewards.ipynb). For rewardsReceiptItemList column in receipts table, there are more than one elements in this column so I extract those elements from the original column into new colimns. After exploding them, I find that the rewardsReceiptItemList_brandCode column can merge with the brandCode column in Brand table to have more unformation about the relationship for receipts and brand. Therefore, I connect these two column with the key brandCode and rewardsReceiptItemList_brandCode. For Users table, I connect Users table with Receipts table on Users._id and Receipts.userId. 
+For the three json files, I explode them using Python and export them to csv files. I store the data cleaning process and transformation process in  Fetch_Rewards.ipynb file. The ER_diagram.png is the ER diagram I made to illustrate relationships between three tables. For rewardsReceiptItemList column in receipts table, there are more than one elements in this column so I extract those elements from the original column into new colimns. After exploding them, I find that the rewardsReceiptItemList_brandCode column can merge with the brandCode column in Brand table to have more unformation about the relationship for receipts and brand. Therefore, I connect these two column with the key brandCode and rewardsReceiptItemList_brandCode. For Users table, I connect Users table with Receipts table on Users._id and Receipts.userId. 
 
 ![ER_diagram](https://user-images.githubusercontent.com/62042891/172951436-b06f0444-b6c5-4fa2-8e79-47a2aa19accc.png)
 
 ### Second: Write a query that directly answers a predetermined question from a business stakeholder
 
-In order to execute SQL in Python, I use PySpark on Databricks to import the csv files and write the SQL query (.py).
+In order to execute SQL in Python, I use PySpark on Databricks to import the csv files, write the SQL query and store in  PySpark&SQL.py file.
 
 > What are the top 5 brands by receipts scanned for most recent month?
 
