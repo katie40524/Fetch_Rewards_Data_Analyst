@@ -4,7 +4,7 @@
 
 For the three json files, I explode them using Python and export them to csv files. I store the data cleaning process and transformation process in  *Fetch_Rewards.ipynb* file. The *ER_diagram.png* is the ER diagram I made to illustrate relationships between three tables. For rewardsReceiptItemList column in receipts table, there are more than one elements in this column so I extract those elements from the original column into new colimns. After exploding them, I find that the rewardsReceiptItemList_brandCode column can merge with the brandCode column in Brand table to have more unformation about the relationship for receipts and brand. Therefore, I connect these two column with the key brandCode and rewardsReceiptItemList_brandCode. For Users table, I connect Users table with Receipts table on Users._id and Receipts.userId. 
 
-<img width="339" alt="截圖 2022-06-10 下午9 23 16" src="https://user-images.githubusercontent.com/62042891/173167298-4c9d3aac-98f1-44a1-bbae-46e07ba3d337.png">
+![ER_diagram](https://user-images.githubusercontent.com/62042891/173167476-56938f17-b925-457f-ae45-102b7d3f4e89.png)
 
 ### Second: Write a query that directly answers a predetermined question from a business stakeholder
 
