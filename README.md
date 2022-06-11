@@ -12,7 +12,22 @@ In order to execute SQL in Python, I use PySpark on Databricks to import the csv
 
 > What are the top 5 brands by receipts scanned for most recent month?
 
-<img width="637" alt="截圖 2022-06-09 下午5 43 29" src="https://user-images.githubusercontent.com/62042891/172950366-0a838fad-890b-4fee-9231-732ed827ee47.png">
+```sql
+SELECT
+  rewardsReceiptItemList_brandCode,
+  COUNT(_id) AS receipt_scanned_count,
+  LEFT(dateScanned, 7) AS month
+FROM receipts
+WHERE 
+  rewardsReceiptItemList_brandCode IS NOT NULL
+  AND LEFT(dateScanned, 7) = '2021/01'
+GROUP BY
+  rewardsReceiptItemList_brandCode, month
+ORDER BY
+  COUNT(_id) DESC
+LIMIT 5;
+```
+<img width="632" alt="截圖 2022-06-10 下午9 32 51" src="https://user-images.githubusercontent.com/62042891/173167621-9e948a8e-706e-4238-b89c-c9c56b36bf97.png">
 
 According to the result, we can find out that the top five brands for receipts scanned for most recent month are HY-VEE, PEPSI, KROGER, KLEENEX and BEN AND JERRYS.
 
@@ -20,13 +35,31 @@ According to the result, we can find out that the top five brands for receipts s
 
 The first issue I find that in Users table is that there are mutiple duplicate createdDate and lastLogin in the same user id. Some id has 20 duplicate  records. It will be an issue for the system storage.
 
-![截圖 2022-06-10 上午11 38 42](https://user-images.githubusercontent.com/62042891/173101357-774d7795-cf2c-48b8-b600-c2625d6bee35.png)
+```sql
+SELECT
+  _id,
+ COUNT(*) AS count_duplicate
+FROM users
+GROUP BY
+  _id
+HAVING 
+  COUNT(*) > 1
+ ORDER BY
+   count_duplicate DESC;
+```
+<img width="452" alt="截圖 2022-06-10 下午9 36 13" src="https://user-images.githubusercontent.com/62042891/173167727-c4d00591-68ac-4278-b487-f2817afef062.png">
 
 Another problem is that I can't find the brandCode in Brand table that has a record in rewardsReceiptItemList_brandCode of receipts table. It migth be an issue if we want to find other information from the brandCode from the brand table and there is no information in brand table.
 
-![截圖 2022-06-10 上午11 42 27](https://user-images.githubusercontent.com/62042891/173102083-a98f9e8c-7612-4889-bad7-68b150f65b5a.png)
-
-
+```sql
+SELECT
+  brandCode
+FROM 
+  receipts
+    LEFT JOIN brands
+      ON receipts.rewardsReceiptItemList_brandCode = brands.brandCode
+ ```
+<img width="294" alt="截圖 2022-06-10 下午9 35 43" src="https://user-images.githubusercontent.com/62042891/173167711-2b387c28-239d-4562-9978-a7e52de59bb4.png">
 
 ### Fourth: Communicate with Stakeholders
 
